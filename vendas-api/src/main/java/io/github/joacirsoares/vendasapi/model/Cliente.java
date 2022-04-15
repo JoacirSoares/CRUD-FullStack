@@ -7,12 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "cliente")
 public class Cliente {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,11 +26,11 @@ public class Cliente {
 	
 	@Column(name = "data_cadastro")
 	private LocalDate dataCadastro;
-	
+
 	public Cliente() {
 		super();
 	}
-	
+
 	public Cliente(Long id, LocalDate nascimento, String cpf, String nome, String endereco, String telefone,
 			String email, LocalDate dataCadastro) {
 		super();
@@ -42,7 +43,15 @@ public class Cliente {
 		this.email = email;
 		this.dataCadastro = dataCadastro;
 	}
-
+	
+	/**
+	 * @param nascimento
+	 * @param cpf
+	 * @param nome
+	 * @param endereco
+	 * @param telefone
+	 * @param email
+	 */
 	public Cliente(LocalDate nascimento, String cpf, String nome, String endereco, String telefone, String email) {
 		super();
 		this.nascimento = nascimento;
@@ -53,6 +62,11 @@ public class Cliente {
 		this.email = email;
 	}
 
+	@PrePersist
+	public void prePersist() {
+		setDataCadastro(LocalDate.now());
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -122,4 +136,5 @@ public class Cliente {
 		return "Cliente [id=" + id + ", nascimento=" + nascimento + ", cpf=" + cpf + ", nome=" + nome + ", endereco="
 				+ endereco + ", telefone=" + telefone + ", email=" + email + ", dataCadastro=" + dataCadastro + "]";
 	}
+
 }

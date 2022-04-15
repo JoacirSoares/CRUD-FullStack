@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Layout, Input } from 'components'
+import { Layout, Input, InputMoney } from 'components'
 import { useProdutoService } from 'app/services'
 import { Produto } from 'app/models/produtos'
 import { converterEmBigDecimal, formatReal } from 'app/util/money'
@@ -121,20 +121,19 @@ export const CadastroProdutos: React.FC = () => {
             <div className="columns">
                 <Input label="SKU: *" 
                        columnClasses="is-half" 
-                       onChange={setSku}
+                       onChange={e => setSku(e.target.value)}
                        value={sku}
                        id="inputSku"
                        placeholder="Digite o SKU do produto" 
                        error={errors.sku}
                        />
 
-                <Input label="Preço: *" 
+                <InputMoney label="Preço: *" 
                        columnClasses="is-half" 
-                       onChange={setPreco}
+                       onChange={e => setPreco(e.target.value)}
                        value={preco}
                        id="inputPreco"
                        placeholder="Digite o Preço do produto" 
-                       currency
                        maxLength={16}
                        error={errors.preco}
                        />
@@ -143,7 +142,7 @@ export const CadastroProdutos: React.FC = () => {
            <div className="columns">
                 <Input label="Nome: *" 
                        columnClasses="is-full" 
-                       onChange={setNome}
+                       onChange={e => setNome(e.target.value)}
                        value={nome}
                        id="inputNome"
                        placeholder="Digite o Nome do produto"
@@ -168,7 +167,7 @@ export const CadastroProdutos: React.FC = () => {
 
            <div className="field is-grouped">
                 <div className="control is-link">
-                    <button onClick={submit} className="button">
+                    <button onClick={submit} className="button is-success">
                         { id ? "Atualizar" : "Salvar" }                        
                     </button>
                 </div>

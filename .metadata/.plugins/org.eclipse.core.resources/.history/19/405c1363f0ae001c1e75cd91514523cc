@@ -1,5 +1,0 @@
-package io.github.joacirsoares.vendasapi.model.repository;
-
-public interface ClienteRepository {
-
-}
