@@ -1,9 +1,8 @@
 import { Cliente } from 'app/models/clientes'
-import { useFormik } from 'formik';
+import { useFormik } from 'formik'
 import { Input, InputCPF, InputTelefone, InputDate } from 'components'
 import { validationScheme } from './validationSchema'
 import Router from 'next/router'
-
 
 interface ClienteFormProps {
     cliente: Cliente;
@@ -21,7 +20,6 @@ const formScheme: Cliente = {
     telefone: ''
 }
 
-
 export const ClienteForm: React.FC<ClienteFormProps> = ({
     cliente,
     onSubmit
@@ -37,7 +35,7 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
     return (
         <form onSubmit={formik.handleSubmit}>
             {formik.values.id &&
-            <div className="columns">
+                <div className="columns">
                     <Input id="id" 
                             name="id"
                             label="Código: "
@@ -62,8 +60,9 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       autoComplete="off" 
                       columnClasses="is-full"
                       onChange={formik.handleChange} 
-                      value={formik.values.nome}
-                      error={formik.errors.nome} />
+                      value={formik.values.nome} 
+                      error={formik.errors.nome}
+                      />
            </div>   
            <div className="columns">
                <InputCPF id="cpf" 
@@ -72,8 +71,9 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       autoComplete="off" 
                       columnClasses="is-half"
                       onChange={formik.handleChange} 
-                      value={formik.values.cpf}
-                      error={formik.errors.cpf} />
+                      value={formik.values.cpf} 
+                      error={formik.errors.cpf}
+                      />
 
                 <InputDate id="dataNascimento" 
                       name="dataNascimento"
@@ -81,8 +81,9 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       autoComplete="off" 
                       columnClasses="is-half"
                       onChange={formik.handleChange} 
-                      value={formik.values.dataNascimento}
-                      error={formik.errors.dataNascimento} />
+                      value={formik.values.dataNascimento} 
+                      error={formik.errors.dataNascimento}
+                      />
            </div> 
            <div className="columns">
                <Input id="endereco" 
@@ -91,8 +92,8 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       autoComplete="off" 
                       columnClasses="is-full"
                       onChange={formik.handleChange} 
-                      value={formik.values.endereco}
-                      error={formik.errors.endereco} />
+                      error={formik.errors.endereco}
+                      value={formik.values.endereco} />
            </div>  
            <div className="columns">
                <Input id="email" 
@@ -101,8 +102,8 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       autoComplete="off" 
                       columnClasses="is-half"
                       onChange={formik.handleChange} 
-                      value={formik.values.email}
-                      error={formik.errors.email} />
+                      error={formik.errors.email}
+                      value={formik.values.email} />
 
                 <InputTelefone id="telefone" 
                       name="telefone"
@@ -110,21 +111,23 @@ export const ClienteForm: React.FC<ClienteFormProps> = ({
                       autoComplete="off" 
                       columnClasses="is-half"
                       onChange={formik.handleChange} 
-                      value={formik.values.telefone}
-                      error={formik.errors.telefone} />
+                      error={formik.errors.telefone}
+                      value={formik.values.telefone} />
            </div>   
            <div className="field is-grouped">
                <div className="control is-link">
                     <button type="submit" className="button is-success">
                         { formik.values.id ? "Atualizar" : "Salvar" }                        
                     </button>
-               </div>
-               <div className='control'>
-                    <button type="button" onClick={e => Router.push("/consultas/clientes")} className="button">
-                        voltar      
+                </div>
+                <div className="control">
+                    <button type="button" 
+                            onClick={e => Router.push("/consultas/clientes")} 
+                            className="button">
+                        Voltar                        
                     </button>
                 </div>
-            </div> 
-       </ form>
+            </div>          
+        </form>
     )
 }

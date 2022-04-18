@@ -1,7 +1,6 @@
 package io.github.joacirsoares.vendasapi.rest.clientes;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react'
 import { formatReal } from 'app/util/money'
-import { FormatUtils } from '@4us-dev/utils';
+import { FormatUtils } from '@4us-dev/utils'
 
 const formatUtils = new FormatUtils();
 

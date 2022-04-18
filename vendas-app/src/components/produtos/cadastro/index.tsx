@@ -121,7 +121,7 @@ export const CadastroProdutos: React.FC = () => {
             <div className="columns">
                 <Input label="SKU: *" 
                        columnClasses="is-half" 
-                       onChange={e => setSku(e.target.value)}
+                       onChange={ e => setSku(e.target.value)}
                        value={sku}
                        id="inputSku"
                        placeholder="Digite o SKU do produto" 

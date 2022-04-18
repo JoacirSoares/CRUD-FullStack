@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Layout, Loader } from 'components'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -8,13 +8,14 @@ import useSWR from 'swr'
 import { httpClient } from 'app/http'
 import { AxiosResponse } from 'axios'
 import { useProdutoService } from 'app/services'
+import { useState } from 'react'
 import { Alert } from 'components/common/message'
 
 export const ListagemProdutos: React.FC = () => {
 
     const service = useProdutoService();
     const [ messages, setMessages ] = useState<Array<Alert>>([])
-    const { data: result } = useSWR<AxiosResponse<Produto[]>>
+    const { data: result, error } = useSWR<AxiosResponse<Produto[]>>
                     ('/api/produtos', url => httpClient.get(url) )
 
     const [ lista, setLista ] = useState<Produto[]>([])

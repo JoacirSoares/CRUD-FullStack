@@ -1,0 +1,44 @@
+package io.github.joacirsoares.vendasapi.rest.vendas;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.github.joacirsoares.vendasapi.model.Venda;
+import io.github.joacirsoares.vendasapi.model.repository.ItemVendaRepository;
+import io.github.joacirsoares.vendasapi.model.repository.VendaRepository;
+import io.github.joacirsoares.vendasapi.service.RelatorioVendasService;
+
+@RestController
+@RequestMapping("/api/vendas")
+@CrossOrigin("*")
+public class VendasController {
+
+	@Autowired
+	private VendaRepository repository;
+	@Autowired
+	private ItemVendaRepository itemVendaRepository;
+	@Autowired
+	private RelatorioVendasService relatorioVendasService;
+
+	@PostMapping
+	@Transactional
+	public void realizarVenda( @RequestBody Venda venda) {
+		repository.save(venda);
+		venda.getItens().stream().forEach( iv -> iv.setVenda(venda));
+		itemVendaRepository.saveAll(venda.getItens());
+	}
+	
+	@GetMapping
+	public ResponseEntity<byte[]> relatorioVendas() {
+		byte[] relatorioGerado = relatorioVendasService.gerarRelatorio();
+		return ResponseEntity.ok(null);
+	}
+
+}

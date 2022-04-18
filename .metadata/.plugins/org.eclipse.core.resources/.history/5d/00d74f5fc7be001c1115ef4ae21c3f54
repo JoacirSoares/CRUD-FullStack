@@ -1,0 +1,5 @@
+package io.github.joacirsoares.vendasapi.rest.dashboard;
+
+public class DashboardController {
+
+}
